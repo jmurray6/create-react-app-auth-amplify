@@ -1,29 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Amplify, { API } from 'aws-amplify';
-import aws_exports from './aws-exports';
-Amplify.configure(aws_exports);
-let apiName = 'get_random_cocktail';
-let path = '/random';
+import React, {Component} from 'react';
+
 class App extends Component {
-componentDidMount(){
-    API.get(apiName, path).then(response => {
-      console.log(response)
-    });
-  }
-render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Contacts contacts={this.state.contacts} />
+        )
+    }
+
+    state = {
+        contacts: []
+    };
+
+    componentDidMount() {
+        fetch('vpce-0bd02e6e0e09e7544-4e9yt2ud-us-east-1d.execute-api.us-east-1.vpce.amazonaws.com', {
+          method: 'GET',
+          headers: {
+            'x-api-key': '7xggh6vvja'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ contacts: data })
+            })
+            .catch(console.log)
+    }
 }
+
 export default App;
