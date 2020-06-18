@@ -9,7 +9,7 @@ class App extends Component {
     };
   }
 
-    
+
 
 
     componentDidMount() {
@@ -24,6 +24,21 @@ class App extends Component {
             .then((data) => {this.setState({ data })})
             .catch(console.log)
     }
+
+
+    render() {
+    const { hits } = this.state;
+ 
+    return (
+      <ul>
+        {hits.map(hit =>
+          <li key={hit.objectID}>
+            <a href={hit.url}>{hit.title}</a>
+          </li>
+        )}
+      </ul>
+    );
+  }
 }
 
 export default App;
