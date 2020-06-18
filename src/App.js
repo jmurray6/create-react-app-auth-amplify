@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Amplify from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
+let apiName = 'sampleCloudApi';
+let path = '/items';
 class App extends Component {
-  render() {
+componentDidMount(){
+    API.get(apiName, path).then(response => {
+      console.log(response)
+    });
+  }
+render() {
     return (
       <div className="App">
         <header className="App-header">
