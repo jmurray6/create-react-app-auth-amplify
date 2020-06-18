@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
+import Contacts from './components/contacts';
 
 class App extends Component {
-    constructor(props) {
-    super(props);
- 
-    this.state = {
-      data: null,
+    render() {
+        return (
+            <Contacts contacts={this.state.contacts} />
+        )
+    }
+
+    state = {
+        contacts: []
     };
-  }
 
 
 
 
     componentDidMount() {
-        fetch('vpce-0bd02e6e0e09e7544-4e9yt2ud-us-east-1d.execute-api.us-east-1.vpce.amazonaws.com', {
+        fetch('https://vpce-0bd02e6e0e09e7544-4e9yt2ud-us-east-1d.execute-api.us-east-1.vpce.amazonaws.com', {
           method: 'GET',
           headers: {
             'x-api-key': '7xggh6vvja',
@@ -21,24 +24,10 @@ class App extends Component {
           }
         })
             .then(res => res.json())
-            .then((data) => {this.setState({ data })})
+            .then((data) => {this.setState({ contacts: data })})
             .catch(console.log)
     }
 
-
-    render() {
-    const { hits } = this.state;
- 
-    return (
-      <ul>
-        {hits.map(hit =>
-          <li key={hit.objectID}>
-            <a href={hit.url}>{hit.title}</a>
-          </li>
-        )}
-      </ul>
-    );
-  }
 }
 
 export default App;
