@@ -4,8 +4,8 @@ import './App.css';
 import Amplify, { API } from 'aws-amplify';
 import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
-let apiName = 'sampleCloudApi';
-let path = '/items';
+let apiName = 'get_random_cocktail';
+let path = '/random';
 class App extends Component {
 componentDidMount(){
     API.get(apiName, path).then(response => {
